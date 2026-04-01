@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "freecad": {
+      "command": "node",
+      "args": [
+        "E:/freecad_mcp_server/freecad_mcp_server.js"
+      ]
+    }
+  }
+}

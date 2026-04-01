@@ -1,0 +1,5 @@
+[mcp_servers.freecad]
+command = "node"
+args = ["C:\\freecad_mcp_server\\freecad_mcp_server.js"]
+enabled = true
+alwaysAllow = true

@@ -1,8 +1,8 @@
-# FreeCAD MCP Server for Claude Desktop and Codex Desktop
+# FreeCAD MCP Server for AIエージェント
 
 **バージョン: 0.9.0 HTTP通信バージョン**
 
-このプロジェクトは、**Claude Desktop**が**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをClaude Desktopに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
+このプロジェクトは、**Claude Desktop**または**Codex Desktop**などのAIエージェントが**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをClaude Desktopに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
 
 このサーバーは、FreeCAD内で動作するPythonマクロ（`freecad_mcp_addon.py`）と連携して機能します。
 
@@ -14,11 +14,13 @@
 
 ## 概要とアーキテクチャ
 
-このツールは、Claude Desktopとの対話を通じて、直感的かつ自然言語ベースでFreeCADのモデリング作業を行うためのブリッジとして機能します。
+このツールは、AIエージェントとの対話を通じて、直感的かつ自然言語ベースでFreeCADのモデリング作業を行うためのブリッジとして機能します。
+
+AIエージェントとして**Claude Desktop**を例に説明しています。Codex Desktopでも同様に利用可能です。
 
 **処理フロー:**
-1.  ユーザーがClaude Desktopのチャットで自然言語でプロンプトを送信します。（例: `50mmの立方体を作って`）MCPツールはClaudeが自動的に認識・使用するため、特別なプレフィックスは不要です。
-2.  Claude Desktopは、このNode.jsサーバー（`freecad_mcp_server.js`）を子プロセスとして起動し、`CallToolRequest` を送信します。
+1.  ユーザーがAIエージェントのチャットで自然言語でプロンプトを送信します。（例: `50mmの立方体を作って`）MCPツールはClaudeが自動的に認識・使用するため、特別なプレフィックスは不要です。
+2.  AIエージェントは、このNode.jsサーバー（`freecad_mcp_server.js`）を子プロセスとして起動し、`CallToolRequest` を送信します。
 3.  Node.jsサーバーはリクエストをJSONコマンドに変換し、`http://127.0.0.1:8765/command` に HTTP POST します。
 4.  FreeCAD内で実行中のPythonマクロ（`freecad_mcp_addon.py`）がHTTPサーバーとして待ち受けており、リクエストを受信してFreeCADのPart APIを実行します。
 5.  Pythonマクロは実行結果をHTTPレスポンスとして返します。
@@ -26,8 +28,6 @@
 7.  Claudeがその結果を解釈し、ユーザーに応答します。
 
 > **ポート設定:** デフォルトは `127.0.0.1:8765`。環境変数 `FREECAD_MCP_HOST` / `FREECAD_MCP_PORT` で変更可能です。
-
-
 
 ---
 

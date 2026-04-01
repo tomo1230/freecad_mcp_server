@@ -1,4 +1,4 @@
-# FreeCAD MCP Server for Claude Desktop
+# FreeCAD MCP Server for Claude Desktop and Codex Desktop
 
 **バージョン: 0.9.0 HTTP通信バージョン**
 

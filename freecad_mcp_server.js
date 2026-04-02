@@ -163,6 +163,8 @@ const TOOL_SCHEMAS = {
     },
     delete_all_features: {},
     save_document: { filename: STR('Save path (optional)') },
+    undo: {},
+    redo: {},
     create_sketch: {
         sketch_name: STR('Sketch name', 'Sketch'),
         plane: STR('xy|xz|yz', 'xy'),
@@ -230,7 +232,7 @@ class FreeCADMCPServer {
     constructor() {
         logDebug('Initializing FreeCAD MCP Server...');
         this.server = new Server(
-            { name: 'freecad-mcp-server', version: '1.1.0' },
+            { name: 'freecad-mcp-server', version: '0.9.0' },
             { capabilities: { tools: {} } }
         );
         this.setupToolHandlers();

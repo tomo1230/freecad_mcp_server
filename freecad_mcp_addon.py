@@ -245,10 +245,32 @@ class FreeCADMCPAddon:
             'loft_sketches':                self._loft_sketches,
             'create_pipe':                  self._create_pipe,
             'create_section_view':          self._create_section_view,
+            'undo':                         self._undo,
+            'redo':                         self._redo,
         }
         if command not in handlers:
             raise ValueError(f"Unknown command: {command}")
-        return handlers[command](params)
+
+        # 読み取り系・undo/redo はトランザクション不要
+        no_transaction = {
+            'get_all_bodies', 'get_bounding_box', 'get_body_dimensions',
+            'get_faces_info', 'get_edges_info', 'get_body_center',
+            'get_mass_properties', 'measure_distance', 'measure_angle',
+            'check_interference', 'get_body_relationships',
+            'export_file', 'save_document', 'undo', 'redo', 'execute_macro',
+        }
+        if command in no_transaction:
+            return handlers[command](params)
+
+        doc = self._doc()
+        doc.openTransaction(command)
+        try:
+            result = handlers[command](params)
+            doc.commitTransaction()
+            return result
+        except Exception:
+            doc.abortTransaction()
+            raise
 
     # ------------------------------------------------------------------ helpers
     @staticmethod
@@ -527,14 +549,59 @@ class FreeCADMCPAddon:
         indices  = self._parse_list(params.get('edge_indices', []), int)
         obj      = self._find(doc, name)
 
-        fillet       = doc.addObject("Part::Fillet", f"{name}_Fillet")
-        fillet.Base  = obj
-        edge_count   = len(obj.Shape.Edges)
-        targets      = indices if indices else list(range(edge_count))
-        fillet.Edges = [(i + 1, radius, radius) for i in targets]
-        obj.Visibility = False
-        self._recompute_and_fit(doc)
-        return {"body_name": fillet.Label, "radius": radius, "edges_applied": len(targets)}
+        edge_count = len(obj.Shape.Edges)
+        targets    = indices if indices else list(range(edge_count))
+
+        current_radius = radius
+        min_radius     = 0.01
+        shrink_factor  = 0.5
+        max_attempts   = 6
+
+        for attempt in range(max_attempts):
+            fillet       = doc.addObject("Part::Fillet", f"{name}_Fillet")
+            fillet.Base  = obj
+            fillet.Edges = [(i + 1, current_radius, current_radius) for i in targets]
+            obj.Visibility = False
+            doc.recompute()
+
+            # 形状が有効かチェック（BoundBox の有限値確認）
+            shape = fillet.Shape
+            try:
+                import math
+                bb = shape.BoundBox
+                bb_ok = (
+                    shape is not None and not shape.isNull()
+                    and math.isfinite(bb.XMin) and math.isfinite(bb.XMax)
+                    and math.isfinite(bb.YMin) and math.isfinite(bb.YMax)
+                    and math.isfinite(bb.ZMin) and math.isfinite(bb.ZMax)
+                )
+            except Exception:
+                bb_ok = False
+            if bb_ok:
+                self._fit_view()
+                return {
+                    "body_name": fillet.Label,
+                    "radius": current_radius,
+                    "edges_applied": len(targets),
+                    "requested_radius": radius if current_radius != radius else None,
+                }
+
+            # 無効な場合はフィレットを削除してベースを復元し、半径を縮小して再試行
+            doc.removeObject(fillet.Name)
+            obj.Visibility = True
+            doc.recompute()
+
+            next_radius = current_radius * shrink_factor
+            if next_radius < min_radius:
+                raise RuntimeError(
+                    f"フィレット失敗: 半径 {radius} から {current_radius} まで試しましたが形状が無効です。"
+                    f" エッジに対してフィレット半径が大きすぎる可能性があります。"
+                )
+            current_radius = next_radius
+
+        raise RuntimeError(
+            f"フィレット失敗: {max_attempts} 回試行しましたが有効な形状を生成できませんでした。"
+        )
 
     def _add_chamfer(self, params):
         doc      = self._doc()
@@ -1151,6 +1218,19 @@ class FreeCADMCPAddon:
         obj.Visibility = False
         self._recompute_and_fit(doc)
         return {"body_name": section.Label, "plane": plane, "offset": offset}
+
+    # ------------------------------------------------------------------ undo/redo
+    def _undo(self, params):
+        doc = self._doc()
+        doc.undo()
+        self._fit_view()
+        return {"status": "undo executed"}
+
+    def _redo(self, params):
+        doc = self._doc()
+        doc.redo()
+        self._fit_view()
+        return {"status": "redo executed"}
 
     # ------------------------------------------------------------------ util
     def _delete_all_features(self, params):

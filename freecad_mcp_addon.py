@@ -1104,6 +1104,7 @@ class FreeCADMCPAddon:
         extrude            = doc.addObject("Part::Extrusion", name)
         extrude.Label      = name
         extrude.Base       = sketch
+        extrude.DirMode    = 'Normal'
         extrude.LengthFwd  = length
         extrude.LengthRev  = length if symmetric else 0
         extrude.Solid      = True

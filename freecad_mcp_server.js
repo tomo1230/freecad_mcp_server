@@ -310,7 +310,21 @@ class FreeCADMCPServer {
             }
 
             try {
-                const json = await this.sendCommand(name, args || {});
+                const normalizedArgs = { ...(args || {}) };
+                // Backward compatibility: execute_macro may receive commands as JSON string.
+                if (name === 'execute_macro' && typeof normalizedArgs.commands === 'string') {
+                    try {
+                        const parsed = JSON.parse(normalizedArgs.commands);
+                        normalizedArgs.commands = parsed;
+                    } catch (e) {
+                        throw new McpError(
+                            ErrorCode.InvalidParams,
+                            `Invalid JSON for execute_macro.commands: ${e.message}`
+                        );
+                    }
+                }
+
+                const json = await this.sendCommand(name, normalizedArgs);
                 if (json.status === 'error') {
                     throw new McpError(
                         ErrorCode.InternalError,

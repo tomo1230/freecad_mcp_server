@@ -1247,10 +1247,37 @@ class FreeCADMCPAddon:
 
     def _execute_macro(self, params):
         commands = params.get('commands', [])
-        results  = []
-        for cmd in commands:
-            r = self._dispatch(cmd['tool_name'], cmd.get('arguments', {}))
-            results.append({"tool": cmd['tool_name'], "result": r})
+
+        # Accept commands as JSON string, list, or a single command object.
+        if isinstance(commands, str):
+            try:
+                commands = json.loads(commands)
+            except Exception as e:
+                raise ValueError(f"Invalid JSON in 'commands': {e}")
+        elif isinstance(commands, dict):
+            commands = [commands]
+
+        if not isinstance(commands, list):
+            raise ValueError("'commands' must be a list, a command object, or a JSON string representing either.")
+
+        results = []
+        for i, cmd in enumerate(commands):
+            if not isinstance(cmd, dict):
+                raise ValueError(f"commands[{i}] must be an object with 'tool_name' and optional 'arguments'.")
+
+            tool_name = cmd.get('tool_name')
+            if not tool_name:
+                raise ValueError(f"commands[{i}] is missing required field 'tool_name'.")
+
+            arguments = cmd.get('arguments', {})
+            if arguments is None:
+                arguments = {}
+            if not isinstance(arguments, dict):
+                raise ValueError(f"commands[{i}].arguments must be an object.")
+
+            r = self._dispatch(tool_name, arguments)
+            results.append({"tool": tool_name, "result": r})
+
         return {"executed": len(results), "results": results}
 
 

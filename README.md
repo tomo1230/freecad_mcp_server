@@ -1,6 +1,6 @@
 # FreeCAD MCP Server for AIエージェント
 
-**バージョン: 0.9.0 HTTP通信バージョン**
+**バージョン: 0.9.0**
 
 このプロジェクトは、**Claude Desktop**または**Codex Desktop**などのAIエージェントが**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをClaude Desktopに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
 
@@ -49,6 +49,31 @@ AIエージェントとして**Claude Desktop**を例に説明しています。
     cd freecad_mcp_server
     npm install
     ```
+
+### Step 2.5: 回帰テストの実行
+FreeCAD MCP の全ツールをまとめて確認したい場合は、FreeCAD で `freecad_mcp_addon.py` を起動した状態で次を実行します。
+
+```bash
+npm run test:regression
+```
+
+PowerShell で `npm` 実行がブロックされる環境では、次を使ってください。
+
+```bash
+npm.cmd run test:regression
+```
+
+この回帰テストでは以下を確認します。
+
+- 57 個の MCP ツールをすべて実行できること
+- 形状作成、ブール演算、計測、スケッチ拘束、保存、エクスポートが成功すること
+- `get_edges_info` が複合形状でも失敗しないこと
+- `extrude_sketch` が閉じたスケッチで正常動作すること
+
+実行後は作業ディレクトリに次の成果物が生成されます。
+
+- `regression_all_tools_<timestamp>.fcstd`
+- `regression_comboAll_<timestamp>.stl`
 
 ### Step 3: FreeCADでマクロを実行
 1.  FreeCADを起動します。
@@ -366,8 +391,8 @@ Claudeは以下のツールを呼び出すことでFreeCADを操作します。
 | `add_fillet` | エッジにフィレット（角丸め）を追加。半径が大きすぎる場合は自動的に縮小してリトライ | body_name, radius, edge_indices[] (空=全エッジ) |
 | `add_chamfer` | エッジに面取りを追加 | body_name, distance, edge_indices[] (空=全エッジ) |
 | `shell_body` | ボディをシェル（中空）化 | body_name, thickness, face_indices[], new_body_name |
-| `create_rectangular_pattern` | 矩形パターンで複製 | source_body_name, quantity_one, distance_one, direction_one_axis(x/y/z), quantity_two, distance_two, direction_two_axis(x/y/z) |
-| `create_circular_pattern` | 円形パターンで複製 | source_body_name, quantity, angle, axis(x/y/z) |
+| `create_rectangular_pattern` | 矩形パターンで複製 | source_body_name, quantity_one, distance_one, direction_one_axis(x/y/z), quantity_two, distance_two, direction_two_axis(x/y/z), new_body_base_name |
+| `create_circular_pattern` | 円形パターンで複製 | source_body_name, quantity, angle, axis(x/y/z), new_body_base_name |
 | `create_section_view` | 断面ビュー（カット済みボディ）を作成 | body_name, plane(xy/xz/yz), offset, new_body_name |
 
 ### ブール演算ツール (3種)

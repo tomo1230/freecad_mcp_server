@@ -56,7 +56,7 @@
 2. ターミナルでディレクトリに移動し、依存関係をインストールします。
    ```bash
    cd freecad_mcp_server
-   npm install
+   npm install @modelcontextprotocol/sdk
    ```
 
 ### Step 3: FreeCADでマクロを起動

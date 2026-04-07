@@ -1,4 +1,4 @@
-# FreeCAD MCP Server Addin for AIエージェント
+# FreeCAD Addin MCP Server for AIエージェント
 
 **バージョン: 0.9.0**
 

@@ -3,7 +3,7 @@
     "freecad": {
       "command": "node",
       "args": [
-        "E:/freecad_mcp_server/freecad_mcp_server.js"
+        "C:/freecad_mcp_server/freecad_mcp_server.js"
       ]
     }
   }

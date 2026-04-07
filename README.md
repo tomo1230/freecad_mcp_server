@@ -45,7 +45,7 @@
 
 ### Step 1: 共通の前提条件
 - **Node.js**: v18以降がインストールされていること。(<https://nodejs.org/ja/download>)
-- **FreeCAD**: バージョン 0.21以降がインストールされていること。(<https://www.freecad.org/>)
+- **FreeCAD**: バージョン 1.0以降がインストールされていること。(<https://www.freecad.org/>)
 - **このリポジトリ**: `freecad_mcp_server.js` と `freecad_mcp_addon.py` を使える状態にしておくこと
 
 ### Step 2: 共通のインストール

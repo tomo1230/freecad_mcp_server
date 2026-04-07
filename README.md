@@ -70,7 +70,7 @@
 <img width="757" height="571" alt="20260408010437" src="https://github.com/user-attachments/assets/5a97ef28-4201-4dc6-b536-2050841f8656" />
 
 ### Step 4: 回帰テストの実行（任意）
-FreeCAD MCP の全ツールをまとめて確認したい場合は、`freecad_mcp_addon.py` マクロを起動した状態で次を実行します。
+FreeCAD MCP の全ツールをまとめて確認したい場合は、`freecad_mcp_addon.py` マクロを実行した状態で次を実行します。
 
 ```bash
 npm run test:regression

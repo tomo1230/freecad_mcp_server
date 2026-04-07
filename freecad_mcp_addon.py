@@ -759,10 +759,35 @@ class FreeCADMCPAddon:
 
     def _get_edges_info(self, params):
         obj   = self._find(self._doc(), params['body_name'])
-        edges = [
-            {"index": i, "length": e.Length, "curve_type": type(e.Curve).__name__}
-            for i, e in enumerate(obj.Shape.Edges)
-        ]
+        edges = []
+        try:
+            edge_seq = obj.Shape.Edges
+        except Exception as e:
+            return {
+                "edges": [],
+                "count": 0,
+                "warning": f"Failed to access edges for '{params['body_name']}': {e}",
+            }
+
+        for i, e in enumerate(edge_seq):
+            # Some generated edges can raise "undefined curve type" when accessing properties.
+            curve_type = "Unknown"
+            length = None
+
+            try:
+                length = e.Length
+            except Exception:
+                pass
+
+            try:
+                curve = e.Curve
+                if curve is not None:
+                    curve_type = type(curve).__name__
+            except Exception:
+                pass
+
+            edges.append({"index": i, "length": length, "curve_type": curve_type})
+
         return {"edges": edges, "count": len(edges)}
 
     # ------------------------------------------------------------------ export / save
@@ -1100,6 +1125,15 @@ class FreeCADMCPAddon:
         length    = float(params.get('length', 10))
         symmetric = params.get('symmetric', False)
         name      = params.get('body_name', f'{sketch.Label}_Extrude')
+
+        wires = list(getattr(sketch.Shape, 'Wires', []))
+        if not wires:
+            raise ValueError(f"Sketch '{sketch.Label}' does not contain any wire to extrude.")
+        if any(not w.isClosed() for w in wires):
+            raise ValueError(
+                f"Sketch '{sketch.Label}' contains open wire(s). "
+                "extrude_sketch requires closed profiles."
+            )
 
         extrude            = doc.addObject("Part::Extrusion", name)
         extrude.Label      = name

@@ -2,7 +2,7 @@
 
 **バージョン: 0.9.0**
 
-このプロジェクトは、**Claude Desktop**または**Codex Desktop**などのAIエージェントが**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをClaude Desktopに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
+このプロジェクトは、**Claude Desktop**または**Codex Desktop**などのAIエージェントが**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをAIエージェントに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
 
 このサーバーは、FreeCAD内で動作するPythonマクロ（`freecad_mcp_addon.py`）と連携して機能します。
 

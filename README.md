@@ -495,7 +495,6 @@ Fusion 360やBlenderなどのCADソフトとAI（ChatGPTやClaude）を連携さ
 **「FreeCADで400mlの水が入るコップを設計して」Claude AI＆Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
 **「FreeCADで手すり付きの螺旋階段を設計して」Claude AI MCP ＆ FreeCAD API 連携🤖AIモデリングチャレンジ！💪**
 
-<h2 align="center">🎬 DEMO動画</h2>
 <p align="center">
   <a href="https://www.youtube.com/watch?v=y1haF5Is68Y" target="_blank" rel="noopener noreferrer">
     <img src="https://img.youtube.com/vi/y1haF5Is68Y/hqdefault.jpg" width="30%" alt="Video 1">

@@ -122,12 +122,6 @@ GUI の Claude Desktop から FreeCAD を操作したい場合の手順です。
 
 > **注意:** `env` の設定はデフォルト値なので省略可能です。FreeCADのHTTPサーバーポートを変更した場合のみ指定してください。
 
-<img width="743" height="588" alt="スクリーンショット 2025-08-19 000511" src="https://github.com/user-attachments/assets/22c96da8-4020-4a86-874a-1d0b2678a554" />
-
-<img width="530" height="290" alt="スクリーンショット 2025-08-18 235132" src="https://github.com/user-attachments/assets/4ffcaeb2-65d5-4aa5-b227-db32129c52e4" />
-
-<img width="547" height="371" alt="スクリーンショット 2025-08-18 235204" src="https://github.com/user-attachments/assets/4b2bee93-1233-424e-845b-d96ee30eccf7" />
-
 ### 使用例
 - `幅50、奥行き30、高さ20の箱を作って`
 - `"MyCube" という名前の立方体を作成して、その寸法を教えて`
@@ -497,14 +491,14 @@ Fusion 360やBlenderなどのCADソフトとAI（ChatGPTやClaude）を連携さ
 
 **https://www.youtube.com/@ModerundesuAI**
 
-**「サイコロを設計して」Claude AI＆Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
-[![](https://github.com/user-attachments/assets/c5be6840-3321-4431-8342-8ce050bc5314)](https://youtu.be/S_-xYwK5HUc?si=JWE3yv5mxRLGJaXd)
+**「FreeCADでサイコロを設計して」Claude AI＆FreeCAD API 連携🤖AIモデリングチャレンジ！💪**
+[![Watch the video](https://img.youtube.com/vi/y1haF5Is68Y/hqdefault.jpg)](https://www.youtube.com/watch?v=y1haF5Is68Y)
 
-**「400mlのコップを設計して」Claude AI＆Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
-[![](https://github.com/user-attachments/assets/820652c7-1199-4ed2-9589-4fc2b1df5a98)](https://youtu.be/abfEWtMKRV4?si=gTVDwvkIkyt81jnb)
+**「FreeCADで400mlの水が入るコップを設計して」Claude AI＆Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
+[![Watch the video](https://img.youtube.com/vi/te-kNyYsB4U/hqdefault.jpg)](https://www.youtube.com/watch?v=te-kNyYsB4U)
 
-**「使えるコマンドのテストをして」Claude AI MCP ＆ Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
-[![](https://github.com/user-attachments/assets/aded31be-f6b3-45bb-9461-f1cd3c40ca85)](https://youtu.be/Qn-Skeh3o2c?si=7xKrM_bA7IbXT47-)
+**「FreeCADで手すり付きの螺旋階段を設計して」Claude AI MCP ＆ FreeCAD API 連携🤖AIモデリングチャレンジ！💪**
+[![Watch the video](https://img.youtube.com/vi/2ex0zDfI7NM/hqdefault.jpg)](https://www.youtube.com/watch?v=2ex0zDfI7NM)
 
 ---
 

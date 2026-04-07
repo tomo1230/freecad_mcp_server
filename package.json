@@ -1,10 +1,11 @@
 {
   "name": "freecad-mcp-server",
-  "version": "1.1.0",
+  "version": "0.9.0",
   "type": "module",
   "main": "freecad_mcp_server.js",
   "scripts": {
-    "start": "node freecad_mcp_server.js"
+    "start": "node freecad_mcp_server.js",
+    "test:regression": "node scripts/test_all_tools.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.28.0"

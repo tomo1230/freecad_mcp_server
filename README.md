@@ -495,7 +495,7 @@ Fusion 360やBlenderなどのCADソフトとAI（ChatGPTやClaude）を連携さ
 [![Watch the video](https://img.youtube.com/vi/y1haF5Is68Y/hqdefault.jpg)](https://www.youtube.com/watch?v=y1haF5Is68Y)
 
 **「FreeCADで400mlの水が入るコップを設計して」Claude AI＆Autodesk Fusion API 連携🤖AIモデリングチャレンジ！💪**
-[![Watch the video](https://img.youtube.com/vi/te-kNyYsB4U/hqdefault.jpg)](https://www.youtube.com/watch?v=te-kNyYsB4U)
+[![YouTube](https://img.youtube.com/vi/te-kNyYsB4U/maxresdefault.jpg)](https://www.youtube.com/watch?v=te-kNyYsB4U)
 
 **「FreeCADで手すり付きの螺旋階段を設計して」Claude AI MCP ＆ FreeCAD API 連携🤖AIモデリングチャレンジ！💪**
 [![Watch the video](https://img.youtube.com/vi/2ex0zDfI7NM/hqdefault.jpg)](https://www.youtube.com/watch?v=2ex0zDfI7NM)

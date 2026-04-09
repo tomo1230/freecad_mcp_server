@@ -1,4 +1,4 @@
-<img width="640" height="335" alt="Image" src="https://github.com/user-attachments/assets/80ced05f-06d4-4bd1-8cf0-7f333d5c10a3" />
+<img width="640" height="349" alt="Image" src="https://github.com/user-attachments/assets/391487a2-0c19-4040-85f8-54a8d9f1bdc8" />
 
 # FreeCAD Addin ＆ MCP Server for AIエージェント
 

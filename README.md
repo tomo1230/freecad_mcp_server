@@ -534,7 +534,8 @@ Fusion 360やBlenderなどのCADソフトとAI（ChatGPTやClaude）を連携さ
   </a>
 </p>
 
-関連記事（note）
+
+## 関連記事（note）
 
 AIエージェントに「FreeCADでこれ作って」と話しかけるだけで、3Dモデリングできる時代が来た！？ ＜GitHubでOSS公開中＞
 [![AIエージェントに「FreeCADでこれ作って」と話しかけるだけで、3Dモデリングできる時代が来た！？ ＜GitHubでOSS公開中＞](https://github.com/user-attachments/assets/80ced05f-06d4-4bd1-8cf0-7f333d5c10a3)](https://note.com/tomo1230ee/n/ncf784c1e460c)

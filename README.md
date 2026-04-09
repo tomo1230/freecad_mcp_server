@@ -1,5 +1,5 @@
 # FreeCAD Addin ＆ MCP Server for AIエージェント
-<!-- Uploading "rectangle_large_type_2_d7a4357e119460072afb49e79a5c4a5d.png"... -->
+
 **バージョン: 0.9.0**
 
 このプロジェクトは、**Claude Desktop**または**Codex Desktop**などのAIエージェントが**FreeCAD**を直接操作するためのModel Context Protocol (MCP)サーバーです。このツールをAIエージェントに追加することで、チャットのプロンプトを通じて3Dモデルの作成、編集、情報取得が可能になります。
